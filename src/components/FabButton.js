@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 export default class FabButton extends Component{
 
@@ -7,11 +7,12 @@ export default class FabButton extends Component{
 
   toggleMenu = () => {
     const toValue = this.open ? 0 : 1
+    console.log(toValue)
 
 
     Animated.spring(this.animation, {
       toValue,
-      friction: 5,
+      friction: 6,
     }).start();
 
     this.open = !this.open;
@@ -42,7 +43,6 @@ export default class FabButton extends Component{
       ]
     }
 
-
     const rotation ={
       transform:[
         {
@@ -53,27 +53,27 @@ export default class FabButton extends Component{
         }
       ]
     }
+    
     return (
-         <View style={[styles.container, this.props.style]}>
-           <TouchableWithoutFeedback onPress={()=> alert('LIKE!')}>
-             <Animated.View style={[styles.button, styles.secondary, heartStyle]}>
-               <AntDesign name="hearto" size={20} color="#F02A4B" />
-             </Animated.View>
-           </TouchableWithoutFeedback>
-      
-           <TouchableWithoutFeedback onPress={ ()=> alert('LOCALIZAR!')}>
-             <Animated.View style={[styles.button, styles.secondary, pinStyle]}>
-               <Entypo name="location-pin" size={20} color="#F02A4B" />
-             </Animated.View>
-           </TouchableWithoutFeedback>
-      
-           <TouchableWithoutFeedback onPress={this.toggleMenu}>
-             <Animated.View style={[styles.button, styles.menu, rotation]}>
-               <AntDesign name="plus" size={24} color="#FFF" />
-             </Animated.View>
-           </TouchableWithoutFeedback>
-         </View>
-      
+      <View style={[styles.container, this.props.style]}>
+        <TouchableWithoutFeedback onPress={()=> alert('CURTIR!')}>
+          <Animated.View style={[styles.button, styles.secondary, heartStyle]}>
+            <AntDesign name="hearto" size={20} color="#FFF" />
+          </Animated.View>
+        </TouchableWithoutFeedback>
+  
+        <TouchableWithoutFeedback onPress={ ()=> alert('CAMERA!')}>
+          <Animated.View style={[styles.button, styles.secondary, pinStyle]}>
+            <Entypo name="camera" size={20} color="#FFF" />
+          </Animated.View>
+        </TouchableWithoutFeedback>
+  
+        <TouchableWithoutFeedback onPress={this.toggleMenu}>
+          <Animated.View style={[styles.button, styles.menu, rotation]}>
+            <AntDesign name="plus" size={24} color="#FFF" />
+          </Animated.View>
+        </TouchableWithoutFeedback>
+      </View>
         );
   }
 }
@@ -91,43 +91,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowRadius: 10,
-    shadowColor: '#F02A4B',
+    shadowColor: '#00213B',
     shadowOpacity: 0.3,
     shadowOffset: { height: 10 }
   },
   menu:{
-    backgroundColor: '#F02A4B'
+    backgroundColor: '#00213B'
   },
   secondary:{
     width: 48,
     height: 48,
     borderRadius: 46 / 2 ,
-    backgroundColor: '#FFF'
+    backgroundColor: '#00213B'
   }
 });
 
-
-// export default function FabButton( props ) {
-//  return (
-//    <View style={[styles.container]}>
-//      <TouchableHighlight>
-//        <Animated.View style={[styles.button, styles.secondary]}>
-//          <AntDesign name="hearto" size={20} color="#F02A4B" />
-//        </Animated.View>
-//      </TouchableHighlight>
-
-//      <TouchableHighlight>
-//        <Animated.View style={[styles.button, styles.secondary]}>
-//          <Entypo name="location-pin" size={20} color="#F02A4B" />
-//        </Animated.View>
-//      </TouchableHighlight>
-
-//      <TouchableHighlight>
-//        <Animated.View style={[styles.button, styles.menu]}>
-//          <AntDesign name="plus" size={24} color="#FFF" />
-//        </Animated.View>
-//      </TouchableHighlight>
-//    </View>
-
-//   );
-// }
